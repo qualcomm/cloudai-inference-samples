@@ -8,7 +8,8 @@ Project that does ... implemented in ... runs on Qualcomm® *\<processor\>*
 
 ## Branches
 
-**main**: Primary development branch. Contributors should develop submissions based on this branch, and submit pull requests to this branch.
+**main**: Primary development branch. 
+Contributors should develop submissions based on this branch, and submit pull requests to this branch.
 
 ## Requirements
 
@@ -26,7 +27,7 @@ Code samples are provided as purely samples and are not intended for production 
 
 * [Report an Issue on GitHub](../../issues)
 * [Open a Discussion on GitHub](../../discussions)
-* [E-mail us](mailto:REPLACE-ME@qti.qualcomm.com) for general questions
+* [E-mail us](mailto:raysteph@qti.qualcomm.com) for general questions
 
 ## License
 
