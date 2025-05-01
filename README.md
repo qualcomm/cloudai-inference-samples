@@ -2,10 +2,6 @@
 
 This repository will hold sample code from an ongoing blog series specifically focused on using the Qualcomm AI100 and future cloud inference cards hosted by a number of partners.
 
-*\<search this repo for "REPLACE-ME" and update all instances accordingly\>*
-
-Project that does ... implemented in ... runs on Qualcomm® *\<processor\>*
-
 ## Branches
 
 **main**: Primary development branch. 
