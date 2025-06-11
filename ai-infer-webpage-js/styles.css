@@ -1,0 +1,70 @@
+/*
+
+# Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+# SPDX-License-Identifier: BSD-3-Clause
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the conditions in LICENSE.txt are met
+
+*/
+
+/* Define the font family */
+body {
+    font-family:
+        "ui-sans-serif",
+        "system-ui",
+        sans-serif,
+        Apple Color Emoji,
+        Segoe UI Emoji,
+        Segoe UI Symbol,
+        Noto Color Emoji;
+}
+
+/* Style header levels (h1 to h6) with rounded corners and some padding */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+}
+
+main,
+input {
+    font-size: x-large;
+    padding: 0.5rem 1rem;
+}
+
+/* Style body text with line height and color */
+body {
+    line-height: 1.6;
+    color: #333;
+    min-height: 100vh; /* This ensures the body takes up at least the full viewport height */
+    margin: 0;
+}
+
+/* Style buttons with rounded corners, padding, and some border */
+button {
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* Style buttons on hover with a different background color */
+button:hover {
+    background-color: #45a049;
+}
+
+div.footer {
+  position: absolute; /* This makes the div stick to the bottom of the viewport */
+  width: 100%;
+  background-color: #f1f1f1;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for better visual separation */
+}

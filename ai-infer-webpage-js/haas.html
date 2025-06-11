@@ -1,0 +1,151 @@
+<!doctype html>
+
+ <!-- 
+ Haiku as a Service, an LLM driven poet
+ demonstrating use of the Qualcomm Cloud AI 100 Ultra Inference cards
+
+# Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+# SPDX-License-Identifier: BSD-3-Clause
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the conditions in LICENSE.txt are met
+ 
+ -->
+
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Haiku as a Service</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Generate beautiful haiku through our service."
+        />
+        <link rel="stylesheet" href="./styles.css" />
+
+        <!-- Script section -->
+        <script>
+            let API_ENDPOINT = "https://aisuite.cirrascale.com/apis/v2/completions";
+            let API_KEY = "";
+
+            // Getting the prompt right was a challenge, but this seems to work
+            //
+            let SYSTEM_ROLE = "You are a historical Japanese figure who is an expert at crafting haiku. ";
+            let USER_ROLE = "Please write a haiku about: ";
+            let GUARDRAILS = ". Respect the 5-7-5 syllable rule. Respond only with the haiku and no other text.";
+
+            // Build up the query to the API
+
+            async function getNewHaiku(inspiration) {
+                let url = API_ENDPOINT;
+
+                // check for presence of API_KEY
+                if (API_KEY == "") {
+                  updateDivContent('haiku', 'Sorry, no poetry without an API key!');
+                  return;
+                }
+
+                let options = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + API_KEY
+                    },
+                    body: JSON.stringify({
+                        prompt: SYSTEM_ROLE + USER_ROLE + inspiration + GUARDRAILS,
+                        model: "Llama-3.1-8B",
+                        stream: false,
+                        max_tokens: 32
+                    }),
+                };
+
+                // Retrieve an answer
+
+                let response = await fetch(url, options);
+                let responseOK = response && response.ok;
+                let data ="";
+                if (responseOK) {
+                    data = await response.json();
+                } else {
+                    data = "no server response!";
+                };
+
+                // Have to clean up the response from being too long
+                // In testing, the response often had notes about Japanese poets at the end.
+                // I just want the first three lines
+
+                let str = data.choices[0].text;
+                let regex = /-+/;
+                str = str.split(regex)[0];
+                regex = /—+/;
+                str = str.split(regex)[0];
+                regex = /(?=[A-Z])(?![a-z])/;
+                let verses = str.split(regex);
+                if (verses.length < 5 ) { verses.push(''); }
+                for (let i = 0; i < verses.length; i++) {
+                  if (typeof verses[i] === undefined ) {
+                    verses[i] = '';
+                  }
+                }
+
+                str = verses[0]+verses[1]+verses[2]+verses[3];
+
+                // Write the poem out to the page
+
+                updateDivContent("haiku", str);
+            }
+
+            function updateDivContent(divId, newContent) {
+                var targetDiv = document.getElementById(divId); // Get the div with the given id
+                if (targetDiv) {
+                    // Check if the div exists
+                    targetDiv.innerText = newContent; // Set the innerText of the div
+                } else {
+                    console.log(`${divId} not found on page.`); // Log a message if the div is not found
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        <header align="center">
+            <h1>Haiku as a Service</h1>
+        </header>
+
+        <main align="center">
+            <section id="inspirational-words">
+                <label for="inspiration">Enter a topic for your haiku: &nbsp;&nbsp;</label>
+                <input
+                    type="text"
+                    id="inspiration"
+                    name="inspiration"
+                    size="30"
+                    onchange="getNewHaiku(this.value)"
+                /><br />
+            </section>
+
+            <p>&nbsp;</p>
+            <div id="haiku"></div>
+            <p>&nbsp;</p>
+
+            </section>
+        </main>
+
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+
+        <div class="footer" align="center">
+            <label for="apikey"><h2>API Key:</h2></label>
+            <input type="password" id="apikey" name="apikey" size="50"
+                    onchange="API_KEY = this.value" placeholder="Paste API key here"/>
+        </div>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p align="center">
+            Need a key? <a href="https://aisuite.cirrascale.com/account/api-keys" target="_blank">Sign up and get one here.</a>
+        </p>
+    </body>
+</html>
