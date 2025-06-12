@@ -8,7 +8,7 @@ Contributors should develop submissions based on this branch, and submit pull re
 
 ## Requirements
 
-To run this sample, one needs to obtain an account and API key from Cirrascale *here*.
+To run this sample, one needs to obtain an account and API key from Cirrascale [here](https://aisuite.cirrascale.com/home).
 
 ## Installation Instructions
 
