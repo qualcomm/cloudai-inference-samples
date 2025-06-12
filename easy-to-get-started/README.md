@@ -1,5 +1,5 @@
 # Qualcomm AI Inference Suite Makes it Easy to Get Started
-The blog post is *here* and shows how easy it is to call the Cirrascale AI Inference Cloud using the Qualcomm AI Inference Suite.  This sample is in Python.
+The blog post is [here](https://www.qualcomm.com/developer/blog/2025/05/using-qualcomm-ai-inference-suite-is-easy) and shows how easy it is to call the Cirrascale AI Inference Cloud using the Qualcomm AI Inference Suite.  This sample is in Python.
 
 ## Branches
 
