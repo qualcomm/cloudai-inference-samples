@@ -1,7 +1,7 @@
 # Qualcomm AI Inference Suite 
 # Makes it Easy to Get Started
 ### Using Google Colab
-Building off of the blog post [here](https://www.qualcomm.com/developer/blog/2025/05/using-qualcomm-ai-inference-suite-is-easy) which shows how easy it is to call the Cirrascale AI Inference Cloud using the Qualcomm AI Inference Suite, we'll use Google Collab to show the same scenario. In the blog, we assume that the user has Python installed, but if you wanted to use [Google Colab](https://colab.research.google.com/) to try it out without installing anything locally, this sample is for you.
+Building off of the blog post [here](https://www.qualcomm.com/developer/blog/2025/05/using-qualcomm-ai-inference-suite-is-easy) which shows how easy it is to call the Cirrascale AI Inference Cloud using the Qualcomm AI Inference Suite, we'll use Google Colab to show the same scenario. In the blog, we assume that the user has Python installed, but if you wanted to use [Google Colab](https://colab.research.google.com/) to try it out without installing anything locally, this sample is for you.
 
 ## Prepare your environment
 [Google Colab](https://colab.research.google.com/) allows you to write and use Python in your browser without having to install or configure it on a physical machine. While it also allows use of GPUs free of charge, we won't be needing any for this sample as the AI inference is done at Cirrascale.  You can use Google Colab freely with any existing Google account.
