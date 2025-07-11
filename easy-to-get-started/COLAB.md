@@ -17,7 +17,7 @@ To create the secrets for this exercise, click on the **key** icon in the left s
 ADD PICTURE HERE
 
 ### Upload the Qualcomm Imagine SDK wheel file
-This sample requires access to the Qualcomm Imagine SDK, which is provided as a wheel file. The easiest way to do this is to first download the file locally to your machine, and then upload it to Google Colab.
+This sample requires access to the Qualcomm Imagine SDK, which is provided as a wheel file. The easiest way to do this is to first [download the file locally](https://aisuite.cirrascale.com/sdk/_downloads/3433649516f5c32f3603ae6f98c65e48/imagine_sdk-0.4.2-py3-none-any.whl) to your machine, and then upload it to Google Colab.
 
 To provide the file to Google Colab, you choose the **folder** icon in the left side menu, and choose to upload the wheel file from your local machine.  If successful, you should see the file listed in the UI.
 
