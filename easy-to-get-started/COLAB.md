@@ -14,14 +14,18 @@ Google Colab offers a place to store 'secrets' which can be actual secrets or ar
 
 To create the secrets for this exercise, click on the **key** icon in the left side menu and add two name-value pairs for API_KEY and ENDPOINT.  We'll be using these later in the code to retrieve the actual values. You'll need to sign up for an account at Cirrascale and retrieve the key from [your dashboard](https://aisuite.cirrascale.com/account/api-keys) if you don't already have one.
 
-ADD PICTURE HERE
+---
+![alt text](./colab-key.png "colab key menu on left")
+---
 
 ### Upload the Qualcomm Imagine SDK wheel file
 This sample requires access to the Qualcomm Imagine SDK, which is provided as a wheel file. The easiest way to do this is to first [download the file locally](https://aisuite.cirrascale.com/sdk/_downloads/3433649516f5c32f3603ae6f98c65e48/imagine_sdk-0.4.2-py3-none-any.whl) to your machine, and then upload it to Google Colab.
 
 To provide the file to Google Colab, you choose the **folder** icon in the left side menu, and choose to upload the wheel file from your local machine.  If successful, you should see the file listed in the UI.
 
-ADD PICTURE HERE
+---
+![alt text](./colab-file-folder.png "colab file menu on left")
+---
 
 ## Code walkthrough
 Now that we have everything set up, we are ready to walk through the code running in a notebook, step by step. You can execute code a section at a time, or all at once.  To add new sections, choose the **+Code** command in the menu bar.
