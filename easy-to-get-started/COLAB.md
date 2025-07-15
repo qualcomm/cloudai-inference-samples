@@ -1,6 +1,4 @@
-# Qualcomm AI Inference Suite 
-# Makes it Easy to Get Started
-### Using Google Colab
+# Using the Qualcomm AI Inference Suite from Google Colab
 Building off of the blog post [here](https://www.qualcomm.com/developer/blog/2025/05/using-qualcomm-ai-inference-suite-is-easy) which shows how easy it is to call the Cirrascale AI Inference Cloud using the Qualcomm AI Inference Suite, we'll use Google Colab to show the same scenario. In the blog, we assume that the user has Python installed, but if you wanted to use [Google Colab](https://colab.research.google.com/) to try it out without installing anything locally, this sample is for you.
 
 ## Prepare your environment
@@ -14,18 +12,15 @@ Google Colab offers a place to store 'secrets' which can be actual secrets or ar
 
 To create the secrets for this exercise, click on the **key** icon in the left side menu and add two name-value pairs for API_KEY and ENDPOINT.  We'll be using these later in the code to retrieve the actual values. You'll need to sign up for an account at Cirrascale and retrieve the key from [your dashboard](https://aisuite.cirrascale.com/account/api-keys) if you don't already have one.
 
----
-![alt text](./colab-key.png "colab key menu on left")
----
+<img src="colab-key.png" style="border: 1px solid #333; box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.3); border-radius: 8px; max-width: 100%; height: auto; width: 300px;" alt="colab key menu on the left">
 
 ### Upload the Qualcomm Imagine SDK wheel file
 This sample requires access to the Qualcomm Imagine SDK, which is provided as a wheel file. The easiest way to do this is to first [download the file locally](https://aisuite.cirrascale.com/sdk/_downloads/3433649516f5c32f3603ae6f98c65e48/imagine_sdk-0.4.2-py3-none-any.whl) to your machine, and then upload it to Google Colab.
 
 To provide the file to Google Colab, you choose the **folder** icon in the left side menu, and choose to upload the wheel file from your local machine.  If successful, you should see the file listed in the UI.
 
----
-![alt text](./colab-file-folder.png "colab file menu on left")
----
+<img src="colab-file-folder.png" style="border: 1px solid #333; box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.3); border-radius: 8px; max-width: 100%; height: auto; width: 300px;" alt="colab file menu on the left">
+
 
 ## Code walkthrough
 Now that we have everything set up, we are ready to walk through the code running in a notebook, step by step. You can execute code a section at a time, or all at once.  To add new sections, choose the **+Code** command in the menu bar.
