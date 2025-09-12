@@ -15,7 +15,7 @@ To run this sample, one needs to obtain an account and API key from Cirrascale [
 This sample runs from a local filesystem. Simply download to a local folder, install dependencies, **modify the .env file**, and run.
 
 ```bash
-git clone https://github.com/qualcomm/cloudai-inference-samples/tree/main/simple-go-microservice
+git clone https://github.com/qualcomm/cloudai-inference-samples/
 cd .\cloudai-inference-samples\
 cd .\simple-go-microservice\
 go get github.com/joho/godotenv
