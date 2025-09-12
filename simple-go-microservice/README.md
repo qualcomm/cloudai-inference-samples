@@ -1,5 +1,5 @@
-# Using the Qualcomm AI Inference Suite directly from a web page
-The blog post is [here](https://www.qualcomm.com/developer/blog/2025/07/using-qualcomm-ai-inference-suite-directly-from-webpage) and shows how easy it is to call the Qualcomm AI Inference Suite directly from a web page.  This sample is in HTML, CSS, and JavaScript.
+# Using the Qualcomm AI Inference Suite behind a production microservice
+The blog post is *here* and shows how easy it is to call the Qualcomm AI Inference Suite directly from a microservice.  This sample uses the Go programming language.
 
 ## Branches
 
@@ -12,7 +12,15 @@ To run this sample, one needs to obtain an account and API key from Cirrascale [
 
 ## Installation Instructions
 
-This sample runs from a local filesystem. Simply download haas.html and styles.css to the same directory, and then open haas.html in a web browser.
+This sample runs from a local filesystem. Simply download to a local folder, install dependencies, modify the .env file, and run.
+
+```bash
+git clone [INSERT GITHUB URL HERE]
+cd [PATH]
+go get github.com/joho/godotenv
+go mod tidy
+go run .\micro.go
+```
 
 ## Development
 
