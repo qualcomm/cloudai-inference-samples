@@ -1,5 +1,5 @@
 # Using the Qualcomm AI Inference Suite behind a production microservice
-The blog post is *here* and shows how easy it is to call the Qualcomm AI Inference Suite directly from a microservice.  This sample uses the Go programming language.
+The blog post is [here](https://www.qualcomm.com/developer/blog/2025/10/creating-microservice-using-qualcomm-ai-inference-suite) and shows how easy it is to call the Qualcomm AI Inference Suite directly from a microservice.  This sample uses the Go programming language.
 
 ## Branches
 
