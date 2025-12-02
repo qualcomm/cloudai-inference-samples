@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>LLM Parameter Comparison Tool</title>
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #f0f4f8;
+            --border-color: #dbe2ef;
+            --text-color: #333;
+            --shadow: 0 2px 5px rgba(0,0,0,0.1);
+            --border-radius: 8px;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f9fafb;
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .banner {
+            background-color: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        select, input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 14px;
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .content {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .panel {
+            flex: 1;
+            background-color: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .panel-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+        
+        .small-input {
+            max-width: 120px;
+        }
+        
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .slider {
+            flex-grow: 1;
+        }
+        
+        .slider-value {
+            width: 40px;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .result-container {
+            margin-top: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            min-height: 200px;
+            background-color: var(--secondary-color);
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .compare-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            height: 100%;
+            min-height: 100px;
+        }
+        
+        .compare-button:hover {
+            background-color: #3a5a84;
+        }
+        
+        .prompt-container {
+            display: flex;
+            gap: 15px;
+            align-items: stretch;
+        }
+        
+        .prompt-textarea {
+            flex-grow: 1;
+        }
+        
+        .config-layout {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .sliders-column {
+            flex: 3;
+        }
+        
+        .inputs-column {
+            flex: 1;
+        }
+        
+        /* New styles for the side-by-side dropdowns */
+        .dropdown-container {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .dropdown-item {
+            flex: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .prompt-container {
+                flex-direction: column;
+            }
+            
+            .compare-button {
+                margin-top: 10px;
+                width: 100%;
+                height: auto;
+            }
+            
+            .config-layout {
+                flex-direction: column;
+            }
+            
+            .dropdown-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="banner">
+            <div class="form-group">
+                <label for="prompt">Prompt:</label>
+                <div class="prompt-container">
+                    <textarea id="prompt" name="prompt" placeholder="Enter your prompt here..." class="prompt-textarea"></textarea>
+                    <button class="compare-button" onclick="clearResults(); runCompare()">Compare</button>
+                    <button class="compare-button" onclick="resetForm()">Reset</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="panel">
+                <h2 class="panel-title">Configuration A</h2>
+                <div class="dropdown-container">
+                    <div class="form-group dropdown-item">
+                        <label for="providerA">Provider:</label>
+                        <select id="providerA" name="providerA" onchange="getLLMsFromEndpoint(this.value,'A');selected_providerA=this.value;">
+                        </select>
+                    </div>
+                    <div class="form-group dropdown-item">
+                        <label for="modelA">Model:</label>
+                        <select id="modelA" name="modelA">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="config-layout">
+                    <div class="sliders-column">
+                        <div class="form-group">
+                            <label for="temperatureA">Temperature: <span id="tempValueA">1.0</span></label>
+                            <div class="slider-container">
+                                <input type="range" id="temperatureA" name="temperatureA" class="slider" min="0" max="2" step="0.1" value="0.0" oninput="document.getElementById('tempValueA').textContent = this.value">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="repetitionPenaltyA">Repetition Penalty: <span id="repPenValueA">1.0</span></label>
+                            <div class="slider-container">
+                                <input type="range" id="repetitionPenaltyA" name="repetitionPenaltyA" class="slider" min="0" max="2" step="0.1" value="1.1" oninput="document.getElementById('repPenValueA').textContent = this.value">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="topPA">Top P: <span id="topPValueA">0.50</span></label>
+                            <div class="slider-container">
+                                <input type="range" id="topPA" name="topPA" class="slider" min="0" max="1" step="0.01" value="0.95" oninput="document.getElementById('topPValueA').textContent = this.value">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inputs-column">
+                        <div class="form-group">
+                            <label for="maxTokensA">Max Tokens:</label>
+                            <input type="number" id="maxTokensA" name="maxTokensA" class="small-input" min="0" max="999999" value="2048">
+                        </div>
+                        <div class="form-group">
+                            <label for="topKA">Top K:</label>
+                            <input type="number" id="topKA" name="topKA" class="small-input" min="0" max="999" value="50">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="resultA">Result:</label>
+                    <div id="resultA" class="result-container"></div>
+                </div>
+            </div>
+            
+            <div class="panel">
+                <h2 class="panel-title">Configuration B</h2>
+                <div class="dropdown-container">
+                    <div class="form-group dropdown-item">
+                        <label for="providerB">Provider:</label>
+                        <select id="providerB" name="providerB" onchange="getLLMsFromEndpoint(this.value,'B');selected_providerB=this.value;">
+                        </select>
+                    </div>
+                    <div class="form-group dropdown-item">
+                        <label for="modelB">Model:</label>
+                        <select id="modelB" name="modelB">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="config-layout">
+                    <div class="sliders-column">
+                        <div class="form-group">
+                            <label for="temperatureB">Temperature: <span id="tempValueB">1.0</span></label>
+                            <div class="slider-container">
+                                <input type="range" id="temperatureB" name="temperatureB" class="slider" min="0" max="2" step="0.1" value="0.0" oninput="document.getElementById('tempValueB').textContent = this.value">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="repetitionPenaltyB">Repetition Penalty: <span id="repPenValueB">1.0</span></label>
+                            <div class="slider-container">
+                                <input type="range" id="repetitionPenaltyB" name="repetitionPenaltyB" class="slider" min="0" max="2" step="0.1" value="1.1" oninput="document.getElementById('repPenValueB').textContent = this.value">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="topPB">Top P: <span id="topPValueB">0.50</span></label>
+                            <div class="slider-container">
+                                <input type="range" id="topPB" name="topPB" class="slider" min="0" max="1" step="0.01" value="0.95" oninput="document.getElementById('topPValueB').textContent = this.value">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inputs-column">
+                        <div class="form-group">
+                            <label for="maxTokensB">Max Tokens:</label>
+                            <input type="number" id="maxTokensB" name="maxTokensB" class="small-input" min="0" max="999999" value="2048">
+                        </div>
+                        <div class="form-group">
+                            <label for="topKB">Top K:</label>
+                            <input type="number" id="topKB" name="topKB" class="small-input" min="0" max="999" value="50">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="resultB">Result:</label>
+                    <div id="resultB" class="result-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <div style="
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        color: #999999;
+        opacity: 0.7;
+        pointer-events: none;
+        z-index: 9999;
+      ">
+        powered by the Qualcomm AI Inference Suite
+      </div>
+    </body>
+<script src="endpoints.js"></script>
+<script src="param-comparo.js"></script>
+</html>
